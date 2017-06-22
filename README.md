@@ -35,7 +35,7 @@ Now you can test your image using compose:
 	
 And access your WLS AdminServer at: [http://localhost:7001/console](http://localhost:7001/console) (User: weblogic / Password: set during the docker build)
 
-You should also be able to access the sample app at: [http://localhost:7002/sample/](http://localhost:7002/sample/)
+You should also be able to access the sample app at: [http://localhost:7002/docker/](http://localhost:7002/docker/)
 It should show you a very simple webpage titled WebLogic on Docker and presenting you with information about the ManagedServer running the app.
 
 # Deploying it to swarm
@@ -56,7 +56,7 @@ http://\<your\_swarm\_app\_url\>:7001/console
 
 Your sample app should be available at:
 
-http://\<your\_swarm\_app\_url\>:7002/sample/
+http://\<your\_swarm\_app\_url\>:7002/docker/
 
 Now you can start scaling the app as well:
 

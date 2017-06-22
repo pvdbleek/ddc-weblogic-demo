@@ -1,7 +1,7 @@
 FROM wls-domain 
 
-ENV APP_NAME="sample" \
-    APP_PKG_FILE="sample.war" \
+ENV APP_NAME="docker" \
+    APP_PKG_FILE="docker.war" \
     APP_PKG_LOCATION="/u01/oracle"
 
 COPY container-scripts/* /u01/oracle/
