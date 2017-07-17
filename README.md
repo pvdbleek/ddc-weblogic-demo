@@ -20,7 +20,8 @@ Purchase a subscription (don't worry it's free of charge!), login to Docker Hub 
 Clone the git repo:
 
 	$ git clone https://github.com/pvdbleek/ddc-weblogic-demo
-	
+
+### Build using Docker prior to 17.05	
 First, build a WebLogic image that has a domain:
 
 	$ docker build -f ./Dockerfile.domain -t wls-domain --build-arg=PRODUCTION_MODE=dev --build-arg=ADMIN_PASSWORD=welcome1 --build-arg ADMIN_NAME=WL_AdminServer .
@@ -28,6 +29,14 @@ First, build a WebLogic image that has a domain:
 Next, let's build an app image from the domain image (it requires a two step process, so I'll change this when multi-stage builds are available):
 
 	$ docker build -t pvdbleek/wls-app -f ./Dockerfile.app .
+
+### Build using Docker 17.05 or later
+
+Docker 17.05 introduced multi-stage builds. This way we can do the two needed build steps in one single Dockerfile:
+
+````   
+$ docker build -f ./Dockerfile.msb -t pvdbleek/wls-app --build-arg=PRODUCTION_MODE=dev --build-arg=ADMIN_PASSWORD=welcome1 --build-arg ADMIN_NAME=WL_AdminServer .
+````
 
 Now you can test your image using compose:
 

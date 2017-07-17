@@ -6,14 +6,14 @@ networks:
 services:
 
   wlsadmin:
-    image: pvdbleek/wls-app
+    image: dtr.pvdbleek.dtcntr.net/pvdbleek/wls-app
     networks:
       wlsnet:
     ports:
       - 7001:7001
 
   managedserver:
-    image: pvdbleek/wls-app
+    image: dtr.pvdbleek.dtcntr.net/pvdbleek/wls-app
     command: createServer.sh
     networks:
       wlsnet:
