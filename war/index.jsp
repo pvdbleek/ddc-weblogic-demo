@@ -3,12 +3,19 @@
     Created on : Dec 21, 2015, 4:33:25 PM
     Author     : bruno
 --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.Set"%>
 <%@page import="weblogic.management.runtime.ServerRuntimeMBean"%>
 <%@page import="java.net.UnknownHostException"%>
 <%@page import="java.net.InetAddress"%>
 <%@page import="weblogic.management.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.io.File"%>
+<%@page import="java.io.FileNotFoundException"%>
+<%@page import="java.util.Scanner"%>
+<%@page import="java.util.List"%>
+
 <%@ page language="java" import="java.sql.*" %>
 
 <%!public static String getIpAddOfCurrSrv() {
@@ -51,11 +58,19 @@
     }
 %>
 
-<%! private String runQuery(String cond) throws SQLException {
+<%!public static String dbpasswd; {
+    try {
+        dbpasswd = new Scanner(new File("/run/secrets/oracledb_passwd")).useDelimiter("\\Z").next();
+     } catch (FileNotFoundException e) {
+        e.printStackTrace();
+     }
+ }
+%>
+
+<%! private String runQuery(String dbpasswd) throws SQLException {
      Connection conn = null;
      Statement stmt = null;
      ResultSet rset = null;
-     String dbpasswd = System.getenv("DB_PASSWD");
      try {
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         conn = DriverManager.getConnection("jdbc:oracle:thin:@oracledb:1521:ORCL",
@@ -85,7 +100,6 @@
   }
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -132,9 +146,9 @@
         <table border="1">
         <td>
         <br>
-        <% String searchCondition = request.getParameter("cond");
+       <% String searchCondition = request.getParameter("cond");
                if (searchCondition == null) { %>
-                <%= runQuery(searchCondition) %>  <BR>
+                <%= runQuery(dbpasswd) %>  <BR>
         <% }  %>
         </td>
         </table>

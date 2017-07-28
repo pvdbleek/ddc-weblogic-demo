@@ -7,14 +7,14 @@ networks:
 services:
 
   wlsadmin:
-    image: pvdbleek/wls-app
+    image: pvdbleek/wls-app:latest
     networks:
       oranet:
     ports:
       - 7001:7001
 
   managedserver:
-    image: pvdbleek/wls-app
+    image: pvdbleek/wls-app:latest
     command: createServer.sh
     networks:
       oranet:
